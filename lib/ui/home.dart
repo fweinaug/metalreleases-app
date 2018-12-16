@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:albumreleases_app/ui/about.dart';
 import 'package:albumreleases_app/ui/custom_icons.dart';
 import 'package:albumreleases_app/ui/release_list.dart';
+import 'package:albumreleases_app/ui/search.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -16,12 +17,25 @@ class HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         title: Row(
-          children: <Widget>[
+          children: [
             Text('Metal', style: TextStyle(fontWeight: FontWeight.w900, color: Colors.white70)),
             Text('Releases', style: TextStyle(fontWeight: FontWeight.w400, color: Colors.white54)),
           ],
         ),
-        actions: <Widget>[
+        actions: [
+          IconButton(
+            icon: Icon(Icons.search),
+            tooltip: 'Search',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Search(),
+                    fullscreenDialog: true,
+                ),
+              );
+            },
+          ),
           PopupMenuButton(
             itemBuilder: (context) {
               return [
@@ -41,7 +55,6 @@ class HomeState extends State<Home> {
           )
         ],
       ),
-      //body: _children[_currentIndex],
       body: Stack(
         children: [
           Offstage(

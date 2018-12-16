@@ -25,7 +25,14 @@ class ReleaseListState extends State<ReleaseList> {
     return FutureBuilder<List<Release>>(
       future: _releases,
       builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting
+            || snapshot.connectionState == ConnectionState.active)
+          return Center(child: CircularProgressIndicator());
+
         if (snapshot.hasData) {
+          if (snapshot.data.length == 0)
+            return Center(child: Text('No releases found.'));
+
           return ListView.builder(
             itemCount: snapshot.data.length,
             itemBuilder: (context, index) {
@@ -55,7 +62,7 @@ class ReleaseListState extends State<ReleaseList> {
           );
         }
 
-        return Center(child: CircularProgressIndicator());
+        return Container();
       },
     );
   }
@@ -85,5 +92,71 @@ class RecentReleaseList extends ReleaseList {
     final api = ReleaseApi();
 
     return await api.getRecentReleases();
+  }
+}
+
+class SearchReleaseList extends ReleaseList {
+  @override
+  Future<List<Release>> _fetchReleases() {
+    return null;
+  }
+
+  @override
+  ReleaseListState createState() => SearchReleaseListState();
+}
+
+class SearchReleaseListState extends ReleaseListState {
+  String _query = '';
+
+  @override
+  Widget build(BuildContext context) {
+    final parent = super.build(context);
+
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          child: TextField(
+            decoration: InputDecoration(
+              suffixIcon: IconButton(
+                  icon: Icon(Icons.search),
+                  onPressed: _canSearch()
+                    ? () {
+                      _search();
+                    }
+                    : null
+              ),
+              hintText: 'Search by artist or title',
+            ),
+            onChanged: (text) {
+              setState(() {
+                _query = text;
+              });
+            },
+            onSubmitted: (text) {
+              if (_canSearch())
+                _search();
+            },
+          ),
+        ),
+        Expanded(
+          child: parent,
+        ),
+      ],
+    );
+  }
+
+  bool _canSearch() => _query.length >= 2;
+
+  void _search() {
+    setState(() {
+      _releases = _fetchReleases();
+    });
+  }
+
+  Future<List<Release>> _fetchReleases() async {
+    final api = ReleaseApi();
+
+    return await api.searchReleases(_query);
   }
 }

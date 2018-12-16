@@ -19,6 +19,10 @@ class ReleaseApi {
     return await _query('$_baseUrl/recent');
   }
 
+  Future<List<Release>> searchReleases(String query) async {
+    return await _query('$_baseUrl/search?q=$query');
+  }
+
   Future<List<Release>> _query(String url) async {
     final response = await http.get(url);
 
