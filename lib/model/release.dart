@@ -1,3 +1,5 @@
+import 'package:albumreleases_app/model/date.dart';
+
 class Release {
   final int id;
   final String artist;
@@ -7,7 +9,7 @@ class Release {
   Release({this.id, this.artist, this.title, this.releaseDate});
 
   get remainingDays {
-    return releaseDate.difference(DateTime.now()).inDays + 1;
+    return releaseDate.difference(getToday()).inDays;
   }
 
   factory Release.fromJson(Map<String, dynamic> json) {

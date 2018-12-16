@@ -13,7 +13,7 @@ class ReleaseCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(top: 4, bottom: 4),
         child: ListTile(
-            trailing: _release.remainingDays >= 0
+            trailing: _release.remainingDays > 0
                 ? CircleAvatar(
                   child: Text(_release.remainingDays.toString(), style: TextStyle(fontWeight: FontWeight.w600)),
                   backgroundColor: Colors.white10,
