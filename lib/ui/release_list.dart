@@ -25,10 +25,6 @@ class ReleaseListState extends State<ReleaseList> {
     return FutureBuilder<List<Release>>(
       future: _releases,
       builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting
-            || snapshot.connectionState == ConnectionState.active)
-          return Center(child: CircularProgressIndicator());
-
         if (snapshot.hasData) {
           if (snapshot.data.length == 0)
             return Center(child: Text('No releases found.'));
@@ -61,6 +57,10 @@ class ReleaseListState extends State<ReleaseList> {
             )
           );
         }
+
+        if (snapshot.connectionState == ConnectionState.waiting
+            || snapshot.connectionState == ConnectionState.active)
+          return Center(child: CircularProgressIndicator());
 
         return Container();
       },
@@ -128,6 +128,7 @@ class SearchReleaseListState extends ReleaseListState {
               ),
               hintText: 'Search by artist or title',
             ),
+            autofocus: true,
             onChanged: (text) {
               setState(() {
                 _query = text;
