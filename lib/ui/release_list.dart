@@ -43,7 +43,7 @@ class ReleaseListState extends State<ReleaseList> {
                 Icon(Icons.error, color: Colors.white12, size: 60),
                 Padding(
                   padding: const EdgeInsets.only(top: 8, bottom: 8),
-                  child: Text('An error accured! Sorry :(', style: Theme.of(context).textTheme.subhead),
+                  child: Text('An error occurred! Sorry :(', style: Theme.of(context).textTheme.subtitle1),
                 ),
                 RaisedButton(
                   child: Text('Retry'),

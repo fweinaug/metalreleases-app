@@ -19,13 +19,13 @@ class MyApp extends StatelessWidget {
         accentColor: accentColor,
         secondaryHeaderColor: Colors.grey[700],
         textTheme: TextTheme(
-          title: TextStyle(
+          headline6: TextStyle(
             fontSize: 17,
             fontWeight: FontWeight.w400,
             color: accentColor,
             letterSpacing: 0.2,
           ),
-          subtitle: TextStyle(
+          subtitle2: TextStyle(
             fontSize: 15,
             fontWeight: FontWeight.w700,
           ),
