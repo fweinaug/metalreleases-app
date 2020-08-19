@@ -1,7 +1,13 @@
+import 'package:albumreleases_app/config_reader.dart';
 import 'package:flutter/material.dart';
 import 'package:albumreleases_app/ui/home.dart';
 
-void main() => runApp(MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await ConfigReader.initialize();
+
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   final Color accentColor = Colors.blue[400];

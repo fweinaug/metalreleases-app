@@ -34,6 +34,7 @@ flutter:
         - asset: fonts/CustomIcons.ttf
 
   assets:
+    - config/
     - images/logo.png
     - images/2x/logo.png
     - images/3.5x/logo.png
