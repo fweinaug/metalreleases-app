@@ -1,3 +1,5 @@
+[![Codemagic build status](https://api.codemagic.io/apps/5e84b9268863ff00142eac77/5e84b9268863ff00142eac76/status_badge.svg)](https://codemagic.io/apps/5e84b9268863ff00142eac77/5e84b9268863ff00142eac76/latest_build)
+
 <p align="center"><img src="images/3.5x/logo.png" width="100"></p>
 <h1 align="center">Metal Releases</h1>
 
